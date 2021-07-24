@@ -1,0 +1,70 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Topwear{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="list-group">
+                <a href="{% url "topwear" %}" class="list-group-item list-group-item-action active" aria-current="true">
+                    ALL Topwear Brands
+                </a>
+                <a href="{% url "topweardata" "HELMONT" %}" class="list-group-item list-group-item-action">HELMONT</a>
+                <a href="{% url "topweardata" "Tricky" %}" class="list-group-item list-group-item-action">Tricky Wear
+                </a>
+                <a href="{% url "topweardata" "Eyebogler" %}"
+                    class="list-group-item list-group-item-action">Eyebogler</a>
+                <a href="{% url "topweardata" "Try" %}" class="list-group-item list-group-item-action">Try This</a>
+                <a href="{% url "topweardata" "below" %}" class="list-group-item list-group-item-action">Below 500</a>
+                <a href="{% url "topweardata" "above" %}" class="list-group-item list-group-item-action">Above 500</a>
+            </div>
+        </div>
+
+        <div class="col-sm-9">
+            <div class="row">
+                <div class="card">
+                    <div class="card-body">
+                        <h3>Topwear</h3>
+                        {% for product in topwear %}
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3 text-center align-self-center"><img src="{{product.product_image.url}}"
+                                    alt="" height="250px" width="160px" >
+
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div>
+                                    <h5>{{product.title}}</h5>
+                                    <p class="mb-2 text-muted small">{{product.description|safe}}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <img src="{% static 'app/images/Capture.png'%}" height="21">
+                                <h4>₹{{product.selling_price}}
+                                    <small class="fw-light text-decoration-line-through">
+                                        ₹{{product.discounted_price}}
+                                    </small>
+                                </h4>
+                                <div class="_3Ay6Sb fw-bold">
+                                    <span>8% off</span>
+                                </div>
+                                <div class="abc">Exchange, 100% Money Back 
+                                    No Cost EMI
+                                </div>
+                                <a href="{% url "product-detail" product.id %}"
+                                class="btn btn-info shadow mt-2"  style="padding-right: 1rem !important;
+                                padding-left: 1rem !important; border-radius: 20px; font-size: 12px;">
+                                    More deatils</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main-content %}

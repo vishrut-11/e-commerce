@@ -1,0 +1,80 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}checkout{% endblock title %}
+{% block main-content %}
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-sm-6">
+      <h4>Order Summary</h4>
+      <hr>
+      {% for item in cart_product  %}
+      <div class="card mb-2">
+        <div class="card-body">
+          <h5>Product: {{item.product.title}}</h5>
+          <p>Quantity: {{item.quantity}}</p>
+          <p class="fw-bold">Price:₹{{item.total_cost}}</p>
+        </div>
+      </div>
+      {% endfor %}
+      <P class="fw-bold"> Total Cost + Gst = ₹{{temp_amount}}</P>
+      <small>Term and Condition: Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, ullam saepe! Iure
+        optio repellat dolor velit, minus rem. Facilis cumque neque numquam laboriosam, accusantium adipisci nisi nihil
+        in et quis?</small>
+    </div>
+    <div class="col-sm-4 offset-sm-1">
+      <h4>Select Shipping Address</h4>
+      <hr>
+      {% if add %}
+      <form action="/paymentdone">
+        {% for ad in add%}
+        <div class="card">
+          <div class="card-body">
+            <h5>{{ad.name}}</h5>
+            <p>{{ad.locality}}, {{ad.city}}, {{ad.state}} - {{ad.zipcode}}</p>
+          </div>
+        </div>
+        <div class="form-check mt-2">
+          <input class="form-check-input" type="radio" name="custid" id="custadd{{forloop.counter}}" value="{{ad.id}}">
+          <label class="form-check-label fw-bold" for="">
+            Address: {{forloop.counter}} </label>
+          <div class="text-end">
+            <button type="submit" class="btn btn-warning mb-3 px-5 fw-bold">Continue</button>
+          </div>
+        </div>
+        {%endfor%}
+        {% else %}
+        <div class="container">
+          <!-- <h4>Currently I am working on this feature</h4>
+          <ul>
+            <li>
+              To Buy Our Products Please <b>Complete Your profile</b> and then add it to cart and place an Order
+            <li>
+              Thank You!
+            </li>
+            </li>
+          </ul> -->
+          <div class="row">
+            <!-- <div class="col-sm-7">
+                <a href="{% url 'add-to-cart'%}" class="btn btn-primary mt-3 px-4 fw-bold"></a>
+              </div> -->
+
+
+            <h4>Please Complete Your Profile and Place an order!!!</h4>
+            <div class="col-sm-5">
+              <button type="submit" disabled aria-label="Close"
+                class="btn btn-warning mt-3 px-4 fw-bold">Checkout</button>
+            </div>
+            <div class="col-sm-5">
+              <a href="{% url 'profile'%}" class="btn btn-primary mt-3 px-4 fw-bold">Profile</a>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+    </div>
+
+  </div>
+  </form>
+</div>
+</div>
+</div>
+{% endblock main-content %}

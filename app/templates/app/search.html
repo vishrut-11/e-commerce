@@ -1,0 +1,39 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %} {% endblock title %}
+{% block main-content %}
+<div class="container my-3">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+        <strong>Message : </strong> {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
+    {% endfor %}
+    {% endif %}
+    <h2>Search results : </h2>
+    {% if data|length < 1 %}
+    <p>No search results</p>
+    Your search query : <b>{{query}}</b> did not match any documents. <br>
+    Suggestions:
+    <ul>
+        <li>Make sure that all words are spelled correctly.</li>
+        <li>Try more general keywords.</li>
+        <li> Try fewer keywords.</li>
+        <li> Try different keywords.</li>
+        </li>
+    </ul>
+    {% endif %}
+    <div class="mx-3" style="background-color: #ffffff;">
+        {% for t in data  %}
+        <!-- <a href="{% url 'product-detail' t.id %}" class="btn">
+      <div class="base"><img src="{{t.product_image.url}}" alt="" height="200px" width="150px">
+      </div>
+      <span class="fw">{{t.title}}</span>
+      <div class="fw-bold">₹{{t.selling_price}}</div>
+      <div class="fw-light text-decoration-line-through">₹{{t.discounted_price}}</div>
+    </a>  -->
+
+        {% endfor %}
+    </div>
+</div>
+    {% endblock main-content %}
